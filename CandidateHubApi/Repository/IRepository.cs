@@ -7,6 +7,7 @@ namespace CandidateHubApi.Repository
         Task AddAsync(TEntity entity);
         Task UpdateAsync(TEntity entity);
         Task<bool> DeleteAsync(int Id);
+        Task<int> GetTotalCountAsync();
         Task<TEntity?> GetByIdAsync(int Id);
         Task<IEnumerable<TEntity>> GetAllAsync(int pageNumber = 1, int pageSize = 10);
         Task<IEnumerable<TEntity>> GetByFilterAsync(Expression<Func<TEntity, bool>> expression);

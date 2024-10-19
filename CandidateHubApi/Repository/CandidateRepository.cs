@@ -34,6 +34,12 @@ namespace CandidateHubApi.Repository
             return true;
         }
 
+        public async Task<int> GetTotalCountAsync()
+        {
+            var result = await _context.Candidates.CountAsync();
+            return result;
+        }
+
         public async Task<IEnumerable<Candidate>> GetByFilterAsync(Expression<Func<Candidate, bool>> expression)
         {
             var result = await _context.Candidates.Where(expression).ToListAsync();
@@ -49,9 +55,6 @@ namespace CandidateHubApi.Repository
 
         public async Task<IEnumerable<Candidate>> GetAllAsync(int pageNumber = 1, int pageSize = 10)
         {
-            if (pageNumber < 1) pageNumber = 1;
-            if (pageSize < 1 || pageSize > 10) pageSize = 10;
-
             var result = _context.Candidates
                 .OrderBy(x => x.CandidateId)
                 .Skip(pageSize * (pageNumber - 1))

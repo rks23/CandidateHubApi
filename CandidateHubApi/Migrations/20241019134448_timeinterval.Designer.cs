@@ -2,6 +2,7 @@
 using CandidateHubApi.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CandidateHubApi.Migrations
 {
     [DbContext(typeof(CandidateHubContext))]
-    partial class CandidateHubContextModelSnapshot : ModelSnapshot
+    [Migration("20241019134448_timeinterval")]
+    partial class timeinterval
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,6 +47,7 @@ namespace CandidateHubApi.Migrations
                         .HasColumnType("character varying(50)");
 
                     b.Property<string>("GithubURL")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("LastName")
@@ -52,14 +56,16 @@ namespace CandidateHubApi.Migrations
                         .HasColumnType("character varying(50)");
 
                     b.Property<string>("LinkedInURL")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("PhoneNo")
                         .IsRequired()
-                        .HasMaxLength(12)
-                        .HasColumnType("character varying(12)");
+                        .HasMaxLength(10)
+                        .HasColumnType("character varying(10)");
 
                     b.Property<string>("TimeInterval")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("CandidateId");
