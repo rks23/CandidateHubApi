@@ -25,3 +25,5 @@ app.UseMiddleware<ExceptionMiddleware>();
 app.MapCandidateApi();
 app.UseHttpsRedirection();
 app.Run();
+
+public partial class Program { }
