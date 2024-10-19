@@ -18,7 +18,6 @@ namespace CandidateHubApi.Context
         [Required]
         [MaxLength(100)]
         [EmailAddress]
-        [Key]
         public string Email { get; set; }
         [Url]
         public string LinkedInURL { get; set; }

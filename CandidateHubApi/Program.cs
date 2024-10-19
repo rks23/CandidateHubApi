@@ -1,23 +1,27 @@
+using CandidateHubApi.API;
 using CandidateHubApi.Context;
+using CandidateHubApi.Middleware;
+using CandidateHubApi.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 var cs = builder.Configuration.GetConnectionString("CandidateHubDB");
 builder.Services.AddDbContext<CandidateHubContext>(opts => opts.UseNpgsql(cs));
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var app = builder.Build();
+builder.Services.AddScoped<CandidateRepository>();
 
-// Configure the HTTP request pipeline.
+var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
+app.UseMiddleware<ExceptionMiddleware>();
+
+app.MapCandidateApi();
 app.UseHttpsRedirection();
 app.Run();

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CandidateHubApi", "CandidateHubApi.csproj", "{CFEA0942-BD0A-47BC-A562-CA38B2C1EC72}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CandidateHubApi", "CandidateHubApi\CandidateHubApi.csproj", "{4805E141-D806-4D84-8624-CBE3A8A18615}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CFEA0942-BD0A-47BC-A562-CA38B2C1EC72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CFEA0942-BD0A-47BC-A562-CA38B2C1EC72}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CFEA0942-BD0A-47BC-A562-CA38B2C1EC72}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CFEA0942-BD0A-47BC-A562-CA38B2C1EC72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4805E141-D806-4D84-8624-CBE3A8A18615}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4805E141-D806-4D84-8624-CBE3A8A18615}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4805E141-D806-4D84-8624-CBE3A8A18615}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4805E141-D806-4D84-8624-CBE3A8A18615}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
