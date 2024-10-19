@@ -1,0 +1,6 @@
+@CandidateHubApi_HostAddress = http://localhost:5199
+
+GET {{CandidateHubApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
