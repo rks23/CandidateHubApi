@@ -38,10 +38,10 @@ namespace CandidateHubApi.API
             });
 
             cand.MapGet("/", async (HttpContext context, CandidateRepository repo, IDistributedCache cache,
-                int pageNo = 1, int pageSize = 10) =>
+                int pageNumber = 1, int pageSize = 10) =>
             {
 
-                if (pageNo < 1) pageNo = 1;
+                if (pageNumber < 1) pageNumber = 1;
                 if (pageSize < 1 || pageSize > 50) pageSize = 10;
 
                 var total = await repo.GetTotalCountAsync();
@@ -50,16 +50,16 @@ namespace CandidateHubApi.API
                 {
                     totalCount = total,
                     pageSize,
-                    currentPage = pageNo,
+                    currentPage = pageNumber,
                     totalPages = (int)Math.Ceiling((double)total / pageSize),
-                    hasNextPage = pageNo < (int)Math.Ceiling((double)total / pageSize),
-                    hasPreviousPage = pageNo > 1
+                    hasNextPage = pageNumber < (int)Math.Ceiling((double)total / pageSize),
+                    hasPreviousPage = pageNumber > 1
                 };
 
                 // Return paginated data along with pagination metadata in response headers (optional)
                 context.Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(paginationMetadata));
 
-                var results = await repo.GetAllAsync(pageNo, pageSize);
+                var results = await repo.GetAllAsync(pageNumber, pageSize);
                 if (results is null) return Results.NotFound();
                 return Results.Ok(results);
             });
@@ -70,6 +70,14 @@ namespace CandidateHubApi.API
                 var validationCtx = new ValidationContext(data);
                 if (!Validator.TryValidateObject(data, validationCtx, validationResults, true))
                 {
+                    return Results.BadRequest(validationResults);
+                }
+
+                var candidateByEmail = await repo.GetByFilterAsync(c => c.Email == data.Email);
+                if (candidateByEmail is not null && candidateByEmail.Any())
+                {
+                    validationResults.Add(new ValidationResult($"Candidate with email " +
+                        $"{data.Email} already exists!", [nameof(data.Email)]));
                     return Results.BadRequest(validationResults);
                 }
 

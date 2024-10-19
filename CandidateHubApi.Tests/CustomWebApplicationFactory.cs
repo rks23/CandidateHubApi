@@ -1,4 +1,5 @@
 ﻿using CandidateHubApi.Context;
+using CandidateHubApi.Tests.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
@@ -51,21 +52,7 @@ namespace CandidateHubApi.Tests
 
         private void SeedTestData(CandidateHubContext context)
         {
-            var candidates = new List<Candidate>();
-            for (int i = 1; i <= 20; i++)
-            {
-                candidates.Add(new Candidate
-                {
-                    CandidateId = i,
-                    FirstName = "FirstName" + i,
-                    LastName = "LastName" + i,
-                    Email = $"candidate{i}@example.com",
-                    GithubURL = string.Empty,
-                    LinkedInURL = string.Empty,
-                    Bio = $"This is bio for candidate {i}",
-                    PhoneNo = $"123-456-789{i}"
-                });
-            }
+            var candidates = CandidateGenerator.GetCandidates();
             // Add seed data to the context if needed
             context.Candidates.AddRange(candidates);
             context.SaveChanges();
